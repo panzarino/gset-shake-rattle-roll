@@ -6,8 +6,6 @@
 ADXL345 acc;
 ITG3200 gyro;
 #define TIME_STEP 100
-float roll = 0;
-float pitch = 0;
 double axsum = 0;
 double aysum = 0;
 double azsum = 0;
@@ -17,7 +15,7 @@ double gzsum = 0;
 int count = 0;
 
 void setup() {
-  Serial.begin(9600);
+  Serial.begin(57600);
   Wire.begin();
   acc.initialize();
   gyro.initialize();
@@ -35,7 +33,6 @@ void loop() {
   gysum += gy;
   gzsum += gz;
   count++;
-  delay(TIME_STEP);
   Serial.print("AX: ");
   Serial.println(axsum/count);
   Serial.print("AY: ");
@@ -48,10 +45,11 @@ void loop() {
   Serial.println(gysum/count);
   Serial.print("GZ: ");
   Serial.println(gzsum/count);
-  // AX: 20.09
-  // AY: 7.69
-  // AZ: 245.04
-  // GX: -10.12
-  // GY: -26.32
-  // GZ: 11.66
+  delay(TIME_STEP);
+  // AX: 14.38
+  // AY: -6.97
+  // AZ: 217.23
+  // GX: -39.35
+  // GY: -0.70
+  // GZ: -9.23
 }

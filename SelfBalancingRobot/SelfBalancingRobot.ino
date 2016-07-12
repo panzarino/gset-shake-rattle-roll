@@ -237,9 +237,9 @@ boolean output_errors = false;  // true or false
 
 // Gyroscope
 // "gyro x,y,z (current/average) = .../OFFSET_X  .../OFFSET_Y  .../OFFSET_Z
-#define GYRO_AVERAGE_OFFSET_X ((float) 0.0)
-#define GYRO_AVERAGE_OFFSET_Y ((float) 0.0)
-#define GYRO_AVERAGE_OFFSET_Z ((float) 0.0)
+#define GYRO_AVERAGE_OFFSET_X ((float) -39.35)
+#define GYRO_AVERAGE_OFFSET_Y ((float) -0.70)
+#define GYRO_AVERAGE_OFFSET_Z ((float) -9.23)
 
 /*
 // Calibration example:
