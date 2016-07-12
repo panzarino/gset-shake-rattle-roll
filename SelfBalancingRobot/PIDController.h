@@ -1,7 +1,7 @@
 #include "Arduino.h"
 
 /**
- * creeds to Emily Liu for teaching me to write PID derps
+ * creds to Emily Liu for teaching me to write PID derps
  */
 
 class PIDController {
