@@ -1,5 +1,9 @@
 /* This file is part of the Razor AHRS Firmware */
 
+#include "PIDController.h"
+
+PIDController pid = PIDController(-255, 255, 0, .3, 0, 0);
+
 // Output angles: yaw, pitch, roll
 void output_angles()
 {
@@ -13,19 +17,26 @@ void output_angles()
   }
   else if (output_format == OUTPUT__FORMAT_TEXT)
   {
-    Serial.print("#YPR=");
-    Serial.print(TO_DEG(yaw)); Serial.print(",");
-    Serial.print(TO_DEG(pitch)); Serial.print(",");
-    Serial.print(TO_DEG(roll)); Serial.println();
-    // power
-    pinMode(3, OUTPUT);
+    pitch = map(TO_DEG(pitch), -360, 360, -255, 255);
+
+    Serial.println(pitch);
+
+    float output = pid.calculate(pitch);
+
+    Serial.println(output);
+    
     // direction
     pinMode(12, OUTPUT);
-    digitalWrite(3, HIGH);
-    double mag = sqrt(sq(TO_DEG(yaw))+sq(TO_DEG(pitch))+sq(TO_DEG(roll)));
-    double output = map(mag, 0, 360, 0, 255);
-    Serial.println(output);
-    analogWrite(12, output);
+    pinMode(13, OUTPUT);
+    // power
+    pinMode(3, OUTPUT);
+    pinMode(11, OUTPUT);
+    
+    digitalWrite(12, HIGH);
+    digitalWrite(13, HIGH);
+    
+    analogWrite(3, -output);
+    analogWrite(11, -output);
   }
 }
 
