@@ -34,7 +34,7 @@ class PIDController {
   float calculate(float curval) {
     // get curval time
     unsigned long curtime = millis();
-    double dt = (double) (curtime - prevtime);      // dt
+    double dt = (double) (curtime - prevtime) / 1000.0;      // dt
     // calculate error from set point
     double error = sp - curval;
     integral += (error * dt);                // update intgral by Riemann sum

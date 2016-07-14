@@ -2,7 +2,7 @@
 
 #include "PIDController.h"
 
-PIDController pid = PIDController(-255, 255, 0, .3, 0, 0);
+PIDController pid = PIDController(-255, 255, 0, 29, 0, 0);    // gain is high af
 
 // Output angles: yaw, pitch, roll
 void output_angles()
@@ -31,12 +31,26 @@ void output_angles()
     // power
     pinMode(3, OUTPUT);
     pinMode(11, OUTPUT);
+
+    /*if (pitch > 0){
+      output = 190;
+    }
+    else {
+      output = -200;
+    }*/
+
+   if (output < 0){
+      output = -output;
+      digitalWrite(12, HIGH);
+      digitalWrite(13, HIGH);
+    }
+    else {
+      digitalWrite(12, LOW);
+      digitalWrite(13, LOW);
+    }
     
-    digitalWrite(12, HIGH);
-    digitalWrite(13, HIGH);
-    
-    analogWrite(3, -output);
-    analogWrite(11, -output);
+    analogWrite(3, output);
+    analogWrite(11, output);
   }
 }
 
